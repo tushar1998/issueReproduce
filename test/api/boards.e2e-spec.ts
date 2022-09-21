@@ -1,18 +1,17 @@
-import { AppController } from 'apps/api/src/app.controller';
 import { TestingModule, Test } from '@nestjs/testing';
 import { AppModule } from 'apps/api/src/app.module';
 import { INestApplication } from '@nestjs/common';
 import { ClientRMQ, RmqOptions, Transport } from '@nestjs/microservices';
-import { delay, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
+import { BoardsModule } from 'apps/boards/src/boards.module';
 
 describe('Test Microservice', () => {
-  let apiController: AppController;
   let app: INestApplication;
   let boardsClient: ClientRMQ;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, BoardsModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -50,7 +49,7 @@ describe('Test Microservice', () => {
       }),
     );
 
-    expect(response.notice).toEqual('board_get_by_id event Received');
+    expect(response.notice).toEqual('board_get event Received');
     expect(response.data.length).toEqual(200);
   });
 

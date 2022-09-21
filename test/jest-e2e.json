@@ -1,0 +1,21 @@
+{
+  "testTimeout": 10000,
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": "..",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^apps/(.*)$": "<rootDir>/apps/$1",
+    "^api/(.*)$": "<rootDir>/apps/api/src/$1"
+  },
+  "preset": "ts-jest",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/libs/api-utils/",
+    "/config/",
+    "/test/"
+  ]
+}
